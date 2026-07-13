@@ -15,7 +15,10 @@ def enviar_evento(nombre_evento):
         "client_id": str(uuid.uuid4()),
         "events": [
             {
-                "name": nombre_evento
+                "name": nombre_evento,
+                "params": {
+                    "debug_mode": 1
+                }
             }
         ]
     }
@@ -24,6 +27,8 @@ def enviar_evento(nombre_evento):
         url,
         json=datos
     )
+
+    print("EVENTO ENVIADO:", nombre_evento)
     print("GA4 STATUS:", respuesta.status_code)
     print("GA4 RESPONSE:", respuesta.text)
 
