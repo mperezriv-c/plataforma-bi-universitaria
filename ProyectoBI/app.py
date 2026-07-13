@@ -1,5 +1,5 @@
 import streamlit as st
-
+import os
 from Front_End.vistas import analitica_page
 from Front_End.vistas.dashboard_page import mostrar_dashboard
 from Back_End.BD.conexion import get_engine
@@ -16,7 +16,16 @@ st.set_page_config(
     page_title="BI Bienestar",
     layout="wide"
 )
-with open("Front_End/assets/style.css", encoding="utf-8") as f:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+css_path = os.path.join(
+    BASE_DIR,
+    "Front_End",
+    "assets",
+    "style.css"
+)
+
+with open(css_path, encoding="utf-8") as f:
     st.markdown(
         f"<style>{f.read()}</style>",
         unsafe_allow_html=True
