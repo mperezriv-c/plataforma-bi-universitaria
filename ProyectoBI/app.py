@@ -38,6 +38,14 @@ with open(css_path, encoding="utf-8") as f:
 if "df" not in st.session_state:
     st.session_state.df = None
 
+if st.session_state.get("salio", False):
+    st.title("👋 Gracias por utilizar la Plataforma BI")
+    st.info(
+        "La salida de la plataforma se realizó correctamente."
+    )
+    
+    st.stop()
+
 with st.sidebar:
 
     menu = st.radio(
@@ -59,6 +67,7 @@ with st.sidebar:
     if st.button("🚪 Salir de la plataforma", use_container_width=True):
         enviar_evento("salida_plataforma")
         st.session_state.clear()
+        st.session_state["salio"] = True
         st.rerun()
 
 if menu == "🏠 Inicio":
