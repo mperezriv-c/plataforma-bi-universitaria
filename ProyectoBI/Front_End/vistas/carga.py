@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from Back_End.analytics.eventos import enviar_evento
 
 def mostrar_carga():
 
@@ -31,6 +32,8 @@ def mostrar_carga():
             st.session_state.archivos[nombre] = df
 
         st.success("✅ Archivos cargados")
+        
+        enviar_evento("carga_datos")
 
         for nombre, df in st.session_state.archivos.items():
 
