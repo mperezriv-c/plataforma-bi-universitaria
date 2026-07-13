@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from Back_End.analytics.eventos import enviar_evento
 import plotly.express as px
 import os
 import numpy as np
@@ -37,6 +38,7 @@ def mostrar_ia_predictiva():
     with col_btn:
         # El botón ahora guarda un estado en la memoria de la app para que no se borre
         if st.button("🚀 Procesar y Reentrenar IA", use_container_width=True):
+            enviar_evento("prediccion_ia")
             st.session_state["ia_entrenada"] = True
 
     # 2. PROCESAR SI EL USUARIO YA LE DIO CLIC AL BOTÓN
