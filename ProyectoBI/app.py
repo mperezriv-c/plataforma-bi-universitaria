@@ -1,5 +1,7 @@
 import streamlit as st
 import os
+from Back_End.analytics.eventos import enviar_evento
+
 from Front_End.vistas import analitica_page
 from Front_End.vistas.dashboard_page import mostrar_dashboard
 from Back_End.BD.conexion import get_engine
@@ -16,6 +18,8 @@ st.set_page_config(
     page_title="BI Bienestar",
     layout="wide"
 )
+enviar_evento("inicio_sesion")
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 css_path = os.path.join(
