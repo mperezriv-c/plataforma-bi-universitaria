@@ -1,14 +1,15 @@
 import streamlit as st
 import requests
 import uuid
+import time
 
 
 def enviar_evento(nombre_evento):
 
     url = (
         "https://www.google-analytics.com/mp/collect"
-        f"?measurement_id={st.secrets.get('GA4_ID')}"
-        f"&api_secret={st.secrets.get('GA4_SECRET')}"
+        f"?measurement_id={st.secrets['GA4_ID']}"
+        f"&api_secret={st.secrets['GA4_SECRET']}"
     )
 
     datos = {
@@ -17,7 +18,9 @@ def enviar_evento(nombre_evento):
             {
                 "name": nombre_evento,
                 "params": {
-                    "debug_mode": 1
+                    "debug_mode": 1,
+                    "session_id": int(time.time()),
+                    "engagement_time_msec": 100
                 }
             }
         ]
@@ -28,8 +31,8 @@ def enviar_evento(nombre_evento):
         json=datos
     )
 
-    print("EVENTO ENVIADO:", nombre_evento)
-    print("GA4 STATUS:", respuesta.status_code)
-    print("GA4 RESPONSE:", respuesta.text)
+    print("EVENTO:", nombre_evento)
+    print("STATUS:", respuesta.status_code)
+    print("RESPUESTA:", respuesta.text)
 
     return respuesta.status_code
