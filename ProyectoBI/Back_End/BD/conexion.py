@@ -1,21 +1,17 @@
 from sqlalchemy import create_engine
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
+import streamlit as st
 
 
 def get_engine():
 
-    host = os.getenv("DB_HOST")
-    port = os.getenv("DB_PORT")
-    database = os.getenv("DB_NAME")
-    user = os.getenv("DB_USER")
-    password = os.getenv("DB_PASSWORD")
-
+    host = st.secrets["DB_HOST"]
+    port = st.secrets["DB_PORT"]
+    database = st.secrets["DB_NAME"]
+    user = st.secrets["DB_USER"]
+    password = st.secrets["DB_PASSWORD"]
 
     conexion = (
-        f"postgresql://{user}:{password}@{host}:{port}/{database}"
+        f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}"
     )
 
     engine = create_engine(conexion)
