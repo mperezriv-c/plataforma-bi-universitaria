@@ -59,3 +59,7 @@ def obtener_metricas_ga4():
 
 
     return datos
+
+if __name__ == "__main__":
+    datos = obtener_metricas_ga4()
+    print(datos)
