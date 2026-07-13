@@ -9,3 +9,5 @@ python-dotenv
 requests
 psycopg2-binary
 graphviz 
+google-analytics-data
+google-auth
