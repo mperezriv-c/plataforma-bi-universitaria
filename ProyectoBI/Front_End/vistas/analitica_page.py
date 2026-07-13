@@ -36,7 +36,6 @@ def mostrar():
 
 
         st.divider()
-
         st.subheader("📌 Eventos registrados en GA4")
 
         eventos = {
