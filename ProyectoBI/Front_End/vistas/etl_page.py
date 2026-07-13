@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from Back_End.analytics.eventos import enviar_evento
 
 def mostrar_etl(engine):
     st.markdown("""
@@ -28,6 +29,7 @@ def mostrar_etl(engine):
     ejecutar = st.button("🚀 Ejecutar ETL Completo (Mapeo Multidimensional)", use_container_width=True)
 
     if ejecutar:
+        enviar_evento("etl_ejecutado") 
         barra = st.progress(0)
         
         for nombre, df in st.session_state.archivos.items():
