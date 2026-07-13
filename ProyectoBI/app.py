@@ -51,6 +51,17 @@ menu = st.sidebar.radio(
         "📈 Analítica Web"
     ]
 )
+st.divider()
+
+    if st.button("🚪 Salir de la plataforma", use_container_width=True):
+
+        enviar_evento("salida_plataforma")
+
+        st.session_state.clear()
+
+        st.success("✅ Saliste correctamente de la plataforma")
+
+        st.rerun()
 
 if menu == "🏠 Inicio":
     mostrar_inicio()
