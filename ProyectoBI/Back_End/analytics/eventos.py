@@ -8,7 +8,7 @@ def enviar_evento(nombre_evento):
     url = (
         "https://www.google-analytics.com/mp/collect"
         f"?measurement_id={st.secrets.get('GA4_ID')}"
-        f"&api_secret={st.secrets['GA4_SECRET']}"
+        f"&api_secret={st.secrets.get('GA4_SECRET')}"
     )
 
     datos = {
