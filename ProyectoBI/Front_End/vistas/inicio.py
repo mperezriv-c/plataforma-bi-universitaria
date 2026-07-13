@@ -1,5 +1,13 @@
 import streamlit as st
+import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+imagen_path = os.path.join(
+    BASE_DIR,
+    "assets",
+    "principal1.png"
+)
 def mostrar_inicio():
 
     col1, col2 = st.columns([1.3,1])
@@ -26,4 +34,4 @@ def mostrar_inicio():
 
     with col2:
         st.markdown("<br><br><br>", unsafe_allow_html=True)
-        st.image("Front_End/assets/principal1.png", width=400)
+        st.image(imagen_path, width=400)
