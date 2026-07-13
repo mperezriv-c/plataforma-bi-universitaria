@@ -38,25 +38,27 @@ with open(css_path, encoding="utf-8") as f:
 if "df" not in st.session_state:
     st.session_state.df = None
 
-menu = st.sidebar.radio(
-    "MENÚ",
-    [
-        "🏠 Inicio",
-        "📂 Carga",
-        "⚙️ ETL",
-        "❄️ Snowflake",
-        "🧠 IA",
-        "📊 KPIs",
-        "📊 Dashboard BI",
-        "📈 Analítica Web"
-    ]
-)
-st.divider()
+with st.sidebar:
+
+    menu = st.radio(
+        "MENÚ",
+        [
+            "🏠 Inicio",
+            "📂 Carga",
+            "⚙️ ETL",
+            "❄️ Snowflake",
+            "🧠 IA",
+            "📊 KPIs",
+            "📊 Dashboard BI",
+            "📈 Analítica Web"
+        ]
+    )
+
+    st.divider()
 
     if st.button("🚪 Salir de la plataforma", use_container_width=True):
         enviar_evento("salida_plataforma")
         st.session_state.clear()
-        st.success("✅ Saliste correctamente de la plataforma")
         st.rerun()
 
 if menu == "🏠 Inicio":
