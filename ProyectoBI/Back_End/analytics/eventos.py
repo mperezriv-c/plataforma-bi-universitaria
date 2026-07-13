@@ -24,7 +24,7 @@ def enviar_evento(nombre_evento):
         url,
         json=datos
     )
-    st.write("GA4 STATUS:", respuesta.status_code)
-    st.write("GA4 RESPONSE:", respuesta.text)
+    print("GA4 STATUS:", respuesta.status_code)
+    print("GA4 RESPONSE:", respuesta.text)
 
     return respuesta.status_code
