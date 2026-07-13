@@ -1,9 +1,11 @@
 import streamlit as st
 import streamlit.components.v1 as components
+from Back_End.analytics.eventos import enviar_evento
 
 def mostrar_dashboard():
 
     st.title("📊 Dashboard BI")
+    enviar_evento("consulta_dashboard_bi")
 
     st.markdown("""
 ### Cuadro de Mando Integral
