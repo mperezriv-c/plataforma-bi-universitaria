@@ -3,8 +3,10 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 from sqlalchemy import text
+from Back_End.analytics.eventos import enviar_evento
 
 def mostrar_kpis(engine):
+    enviar_evento("consulta_kpis")
     query = """
     SELECT 
         fb.bienestar_general,
