@@ -18,7 +18,6 @@ st.set_page_config(
     page_title="BI Bienestar",
     layout="wide"
 )
-enviar_evento("inicio_sesion")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
