@@ -1,18 +1,20 @@
-import streamlit as st
+import pandas as pd
+from Back_End.BD.conexion import get_engine
+
 
 def registrar_evento(nombre):
 
-    if "estadisticas" not in st.session_state:
+    engine = get_engine()
 
-        st.session_state.estadisticas = {
-            "inicio_sesion": 0,
-            "carga_datos": 0,
-            "etl_ejecutado": 0,
-            "consulta_kpis": 0,
-            "prediccion_ia": 0,
-            "dashboard_bi": 0,
-            "salida_plataforma": 0
+    datos = pd.DataFrame([
+        {
+            "nombre_evento": nombre
         }
+    ])
 
-    if nombre in st.session_state.estadisticas:
-        st.session_state.estadisticas[nombre] += 1
+    datos.to_sql(
+        "analitica_eventos",
+        engine,
+        if_exists="append",
+        index=False
+    )
