@@ -14,7 +14,7 @@ def mostrar_dashboard():
 Plataforma Integral de Analítica Universitaria para el análisis del bienestar físico, mental y rendimiento académico estudiantil.
 """)
 
-    url_looker = "https://datastudio.google.com/reporting/b601f4cf-7d20-4c1e-9fc7-ff0bd4e93fb1"
+    url_looker = "https://datastudio.google.com/s/oHJek-0TIAY"
 
     components.iframe(
         url_looker,
