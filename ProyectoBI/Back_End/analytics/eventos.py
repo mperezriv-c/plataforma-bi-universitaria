@@ -3,13 +3,12 @@ import requests
 import uuid
 import time
 
-
 def enviar_evento(nombre_evento):
 
     url = (
         "https://www.google-analytics.com/mp/collect"
-        f"?measurement_id={st.secrets['GA4_ID']}"
-        f"&api_secret={st.secrets['GA4_SECRET']}"
+        f"?measurement_id={st.secrets.get('GA4_ID')}"
+        f"&api_secret={st.secrets.get('GA4_SECRET')}"
     )
 
     datos = {
@@ -26,13 +25,9 @@ def enviar_evento(nombre_evento):
         ]
     }
 
-    respuesta = requests.post(
-        url,
-        json=datos
-    )
+    respuesta = requests.post(url, json=datos)
 
-    print("EVENTO:", nombre_evento)
     print("STATUS:", respuesta.status_code)
-    print("RESPUESTA:", respuesta.text)
+    print("RESPONSE:", respuesta.text)
 
     return respuesta.status_code
