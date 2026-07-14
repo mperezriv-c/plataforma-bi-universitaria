@@ -1,55 +1,57 @@
 import streamlit as st
-from Back_End.analytics.ga4 import obtener_metricas_ga4
+
 def mostrar():
 
-    st.title("🌐 Analítica Web - Google Analytics 4")
+    st.title("🌐 Analítica Web")
 
-    st.markdown("""
-    ### Monitoreo del uso de la Plataforma Integral de Analítica Universitaria
+    estadisticas = st.session_state.get(
+        "estadisticas",
+        {}
+    )
 
-    Datos obtenidos directamente desde Google Analytics 4.
-    """)
+    total = sum(estadisticas.values()) if estadisticas else 0
 
-    try:
+    c1, c2, c3 = st.columns(3)
 
-        datos = obtener_metricas_ga4()
+    with c1:
+        st.metric(
+            "👥 Inicio de sesión",
+            estadisticas.get("inicio_sesion",0)
+        )
 
-        col1, col2, col3 = st.columns(3)
+    with c2:
+        st.metric(
+            "📊 Eventos registrados",
+            total
+        )
 
-        with col1:
-            st.metric(
-                "👥 Usuarios activos",
-                datos.get("usuarios_activos", 0)
-            )
+    with c3:
+        st.metric(
+            "📈 Dashboard BI",
+            estadisticas.get("dashboard_bi",0)
+        )
 
-        with col2:
-            st.metric(
-                "📄 Vistas de página",
-                datos.get("vistas_pagina", 0)
-            )
+    st.divider()
 
-        with col3:
-            st.metric(
-                "📊 Total de eventos",
-                datos.get("eventos", 0)
-            )
+    eventos = {
+        "Inicio": estadisticas.get("inicio_sesion",0),
+        "Carga": estadisticas.get("carga_datos",0),
+        "ETL": estadisticas.get("etl_ejecutado",0),
+        "KPIs": estadisticas.get("consulta_kpis",0),
+        "IA": estadisticas.get("prediccion_ia",0),
+        "Dashboard": estadisticas.get("dashboard_bi",0),
+        "Salida": estadisticas.get("salida_plataforma",0)
+    }
 
+    st.subheader("📊 Eventos registrados")
 
-        st.divider()
-        st.subheader("📌 Eventos registrados en GA4")
+    st.bar_chart(eventos)
 
-        eventos = {
-            "Inicio de sesión": 0,
-            "Carga de datos": 0,
-            "ETL ejecutado": 0,
-            "Consulta de KPIs": 0,
-            "Predicción IA": 0,
-            "Descarga de reporte": 0,
-            "Cierre de sesión": 0
-        }
+    st.divider()
 
-        st.bar_chart(eventos)
+    st.subheader("📋 Resumen")
 
-
-    except Exception as e:
-        st.error(f"Error conectando con Google Analytics 4: {e}")
+    st.table({
+        "Evento": list(eventos.keys()),
+        "Cantidad": list(eventos.values())
+    })
