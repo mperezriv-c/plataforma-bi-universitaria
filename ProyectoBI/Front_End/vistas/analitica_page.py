@@ -1,17 +1,39 @@
 import streamlit as st
-
+import pandas as pd
+from Back_End.conexion import get_engine
 
 def mostrar():
-
     st.title("🌐 Analítica Web")
 
     st.write("Monitoreo del uso de la plataforma.")
 
+    # Leer eventos guardados en Supabase/PostgreSQL
+    try:
 
-    datos = st.session_state.get("estadisticas", {})
+        engine = get_engine()
+
+        df = pd.read_sql(
+            "SELECT * FROM analitica_eventos",
+            engine
+        )
 
 
-    total = sum(datos.values())
+        if df.empty:
+            st.warning("No hay eventos registrados")
+            return
+
+
+        eventos_bd = df["nombre_evento"].value_counts()
+
+
+    except Exception as e:
+
+        st.error(f"Error cargando analítica: {e}")
+        return
+
+
+
+    total = eventos_bd.sum()
 
 
     c1, c2, c3 = st.columns(3)
@@ -19,7 +41,7 @@ def mostrar():
 
     c1.metric(
         "👥 Inicio de sesión",
-        datos.get("inicio_sesion", 0)
+        eventos_bd.get("inicio_sesion", 0)
     )
 
 
@@ -31,7 +53,7 @@ def mostrar():
 
     c3.metric(
         "📈 Dashboard BI",
-        datos.get("dashboard_bi", 0)
+        eventos_bd.get("dashboard_bi", 0)
     )
 
 
@@ -41,33 +63,31 @@ def mostrar():
     eventos = {
 
         "Inicio":
-            datos.get("inicio_sesion", 0),
+            eventos_bd.get("inicio_sesion", 0),
 
         "Carga":
-            datos.get("carga_datos", 0),
+            eventos_bd.get("carga_datos", 0),
 
         "ETL":
-            datos.get("etl_ejecutado", 0),
+            eventos_bd.get("etl_ejecutado", 0),
 
         "KPIs":
-            datos.get("consulta_kpis", 0),
+            eventos_bd.get("consulta_kpis", 0),
 
         "IA":
-            datos.get("prediccion_ia", 0),
+            eventos_bd.get("prediccion_ia", 0),
 
         "Dashboard":
-            datos.get("dashboard_bi", 0),
+            eventos_bd.get("dashboard_bi", 0),
 
         "Salida":
-            datos.get("salida_plataforma", 0)
+            eventos_bd.get("salida_plataforma", 0)
 
     }
-
 
     st.subheader("📊 Eventos registrados")
 
     st.bar_chart(eventos)
-
 
     st.subheader("📋 Resumen")
 
