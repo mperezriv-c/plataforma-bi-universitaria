@@ -3,9 +3,8 @@ import streamlit.components.v1 as components
 from Back_End.analytics.eventos import enviar_evento
 
 def mostrar_dashboard():
-        enviar_evento("dashboard_bi")
-
-
+    enviar_evento("dashboard_bi")
+        
     st.title("📊 Dashboard BI")
 
 
