@@ -48,6 +48,10 @@ if "estadisticas" not in st.session_state:
         "dashboard_bi": 0,
         "salida_plataforma": 0
     }
+    
+if "inicio_registrado" not in st.session_state:
+    enviar_evento("inicio_sesion")
+    st.session_state.inicio_registrado = True
 
 if st.session_state.get("salio", False):
     st.title("👋 Gracias por utilizar la Plataforma BI")
