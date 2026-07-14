@@ -29,7 +29,8 @@ def enviar_evento(nombre_evento):
     print("EVENTO:", nombre_evento)
     print("GA4 STATUS:", respuesta.status_code)
     print("GA4 RESPONSE:", respuesta.text)
-
+    
+    registrar_evento(nombre_evento)
 
     if "estadisticas" in st.session_state:
         if nombre_evento in st.session_state.estadisticas:
