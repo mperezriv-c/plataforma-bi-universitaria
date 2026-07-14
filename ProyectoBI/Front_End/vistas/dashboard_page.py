@@ -5,7 +5,9 @@ from Back_End.analytics.eventos import enviar_evento
 def mostrar_dashboard():
 
     st.title("📊 Dashboard BI")
+if "dashboard_registrado" not in st.session_state:
     enviar_evento("dashboard_bi")
+    st.session_state.dashboard_registrado = True
 
     st.markdown("""
 ### Cuadro de Mando Integral
