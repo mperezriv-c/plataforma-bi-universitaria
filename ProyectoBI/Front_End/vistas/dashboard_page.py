@@ -3,9 +3,7 @@ import streamlit.components.v1 as components
 from Back_End.analytics.eventos import enviar_evento
 
 def mostrar_dashboard():
-    if "dashboard_registrado" not in st.session_state:
         enviar_evento("dashboard_bi")
-        st.session_state.dashboard_registrado = True
 
 
     st.title("📊 Dashboard BI")
