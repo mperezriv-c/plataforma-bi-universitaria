@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from Back_End.conexion import get_engine
+from Back_End.BD.conexion import get_engine
 
 def mostrar():
     st.title("🌐 Analítica Web")
