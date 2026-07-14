@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import uuid
+from Back_End.analytics.estadisticas import registrar_evento
 
 def enviar_evento(nombre_evento):
 
@@ -34,7 +35,6 @@ def enviar_evento(nombre_evento):
             }
         ]
     }
-
     respuesta = requests.post(
         url,
         json=datos
@@ -44,4 +44,5 @@ def enviar_evento(nombre_evento):
     print("GA4 STATUS:", respuesta.status_code)
     print("GA4 RESPONSE:", respuesta.text)
 
+    registrar_evento(nombre_evento)
     return respuesta.status_code
