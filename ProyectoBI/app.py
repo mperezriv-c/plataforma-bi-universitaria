@@ -38,6 +38,17 @@ with open(css_path, encoding="utf-8") as f:
 if "df" not in st.session_state:
     st.session_state.df = None
 
+if "estadisticas" not in st.session_state:
+    st.session_state.estadisticas = {
+        "inicio_sesion": 0,
+        "carga_datos": 0,
+        "etl_ejecutado": 0,
+        "consulta_kpis": 0,
+        "prediccion_ia": 0,
+        "dashboard_bi": 0,
+        "salida_plataforma": 0
+    }
+
 if st.session_state.get("salio", False):
     st.title("👋 Gracias por utilizar la Plataforma BI")
     st.info(
